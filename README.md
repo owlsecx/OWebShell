@@ -18,25 +18,20 @@
 
 ## 📌 Overview
 
-Offline web shell & backdoor detector for web roots (PHP/ASP/ASPX/JSP/Perl/Python)
+
+OWebShell is an offline web-shell and malicious-code detection tool that scans web directories for backdoors, obfuscated PHP/ASP/JSP payloads and suspicious functions. It applies signature and heuristic analysis, entropy scoring and known-pattern matching to flag likely shells without executing any code. It is intended for authorized incident response and server hardening.
 
 ---
 
 ## ✨ Features
 
-- Offline, strictly read-only scanner for web content roots (PHP / ASP / ASPX / JSP / JSPX / Perl / Python / CGI / .htaccess / web.config) — never executes code
-- Known web-shell family signatures: c99, r57, b374k, WSO, China Chopper, weevely, Godzilla, Behinder, AntSword, p0wny, Alfa, IndoXploit, Mini Shell, ASPXSpy, JspSpy ...
-- Dangerous sink analysis with user-input taint proximity (eval/assert/system/exec/passthru/shell_exec/popen, preg_replace /e, create_function, call_user_func ...)
-- Obfuscation indicators — base64 blobs, gzinflate / str_rot13 / hex / chr() chains, variable functions, string-concatenated function names, char() building
-- Static decode layers — safely unwraps base64 / hex / rot13 / gz blobs (pure data, never evaluated) and re-scans the payload for hidden sinks
-- Suspicious uploader detection, polyglot images with embedded code, double extensions, handler hijacks
-- Shannon entropy + "islands of obfuscation" scoring and recently-modified / anomalous file heuristics
-- Per-file malice score (0-100) + A+…F site posture
-- MITRE ATT&CK tags (T1505.003, T1027, T1059 ...) and remediation guidance on every finding
-- Allowlist of known-good SHA-256 hashes / globs and baseline snapshots with new / modified file diff
-- Export TXT / MD / JSON / CSV / SARIF 2.1.0
-- Self-test --demo with benign + malicious samples
-- Full CLI mode (--path DIR, --fail-on, --json, ...)
+
+- Signature and heuristic scanning for PHP/ASP/JSP/Python web shells and backdoors
+- Detection of obfuscation (eval/base64/gzinflate chains) and dangerous function calls
+- Entropy scoring to surface packed or encoded payloads
+- Recursive directory walking with file-type filtering
+- Clear risk reporting with per-file findings and structured export
+- Offline, non-executing analysis with a --self-test mode
 
 ---
 
@@ -49,8 +44,11 @@ Offline web shell & backdoor detector for web roots (PHP/ASP/ASPX/JSP/Perl/Pytho
 
 ## 🚀 Usage
 
+
 ```bash
 ./OWebShell
+./OWebShell --self-test
+./OWebShell --help
 ```
 
 ---
